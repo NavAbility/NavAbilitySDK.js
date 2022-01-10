@@ -1,4 +1,4 @@
-const DFG_VERSION = "0.16.2"
+const DFG_VERSION = "0.17.1"
 const PI = 3.14159
 
 export enum FactorType {
@@ -65,7 +65,7 @@ export function Pose2Pose2Data(mus=[1,0,0.3333*PI], sigmas=[0.01,0.01,0.01]):Fac
     return data
 }
 
-export function Pose2AprilTag4CornersData(id, corners, homography, K=[300.0,0.0,0.0,0.0,300.0,0.0,180.0,120.0,1.0], taglength=0.25):FactorData {
+export function Pose2AprilTag4CornersData(id:string, corners:any, homography:any, K=[300.0,0.0,0.0,0.0,300.0,0.0,180.0,120.0,1.0], taglength=0.25):FactorData {
     let fnc = {
       mimeType: "/application/JuliaLang/PackedPose2AprilTag4Corners",
       corners: corners,

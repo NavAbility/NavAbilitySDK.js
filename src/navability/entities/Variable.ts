@@ -1,4 +1,4 @@
-const DFG_VERSION = "0.16.2";
+const DFG_VERSION = "0.17.1";
 
 export enum VariableType {
     POINT2 = "RoME.Point2",
