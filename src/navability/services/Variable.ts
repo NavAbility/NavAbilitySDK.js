@@ -2,8 +2,9 @@ import { gql } from '@apollo/client';
 
 import { NavAbilityClient } from '../entities/NavAbilityClient';
 import { Client } from '../entities/Client';
-import { Variable } from '../entities/Variable';
-import { MUTATION_ADDVARIABLE, QUERY_VARIABLE, QUERY_VARIABLES } from '../entities/Queries';
+import { Variable, QueryDetail } from '../entities/Variable';
+import { MUTATION_ADDVARIABLE } from '../graphql/QueriesDeprecated';
+import { GQL_FRAGMENT_VARIABLES, GQL_GETVARIABLE, GQL_GETVARIABLES } from '../graphql/Variable';
 
 function dump(variable: Variable) {
   return JSON.stringify(variable);
@@ -23,12 +24,16 @@ export async function addVariable(navAbilityClient: NavAbilityClient, client: Cl
 
 export async function getVariable(navAbilityClient: NavAbilityClient, client: Client, label: string): Promise<any> {
   const response = await navAbilityClient.query({
-    query: gql(QUERY_VARIABLE),
+    query: gql(
+      `
+      ${GQL_FRAGMENT_VARIABLES}
+      ${GQL_GETVARIABLE}
+      `
+    ),
     variables: {
+      ...client,
       label,
-      userId: client.userId,
-      robotId: client.robotId,
-      sessionId: client.sessionId,
+      fields_summary: true
     },
   });
   if (response.Data.errors) {
@@ -38,20 +43,27 @@ export async function getVariable(navAbilityClient: NavAbilityClient, client: Cl
   }
 }
 
-export async function getVariables(navAbilityClient: NavAbilityClient, client: Client): Promise<any[]> {
+export async function getVariables(navAbilityClient: NavAbilityClient, client: Client, detail:QueryDetail = QueryDetail.SKELETON): Promise<any[]> {
   const response = await navAbilityClient.query({
-    query: gql(QUERY_VARIABLES),
+    query: gql(
+      `
+      ${GQL_FRAGMENT_VARIABLES}
+      ${GQL_GETVARIABLES}
+      `
+    ),
     fetchPolicy: 'network-only',
     variables: {
-      userId: client.userId,
-      robotId: client.robotId,
-      sessionId: client.sessionId,
-    },
+      ...client,
+      fields_summary: detail == QueryDetail.SUMMARY,
+      fields_full: detail == QueryDetail.FULL
+    }
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.data.errors[0]}`);
   } else {
-    return response.data?.USER[0]?.robots[0]?.sessions[0]?.variables || [];
+    const result = response.data?.USER[0]?.robots[0]?.sessions[0]?.variables || []
+    console.log(result)
+    return result
   }
 }
 
