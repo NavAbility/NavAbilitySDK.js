@@ -45,7 +45,7 @@ export const QUERY_VARIABLE = `
         }
       }
     }
-  }`
+  }`;
 
 export const QUERY_VARIABLES = `
   query Variables (\$userId: ID, \$robotId: ID, \$sessionId: ID) {
@@ -97,7 +97,7 @@ export const QUERY_VARIABLES = `
         }
       }
     }
-  }`
+  }`;
 
 export const QUERY_FACTOR = `
   query Factor (\$label: ID, \$userId: ID, \$robotId: ID, \$sessionId: ID) {
@@ -117,7 +117,7 @@ export const QUERY_FACTOR = `
         }
       }
     }
-  }`
+  }`;
 
 export const QUERY_FACTORS = `
   query Factors (\$userId: ID, \$robotId: ID, \$sessionId: ID) {
@@ -137,7 +137,7 @@ export const QUERY_FACTORS = `
         }
       }
     }
-  }`
+  }`;
 
 export const QUERY_FILES = `
   query Files {
@@ -145,39 +145,39 @@ export const QUERY_FILES = `
       id
       filename
     }
-  }`
+  }`;
 
 export const QUERY_CALIBRATION = `
   query Calibration($fileId: ID!) {
     calibration(fileId: $fileId) {
       placeholder
     }
-  }`
+  }`;
 
 export const MUTATION_ADDVARIABLE = `
   mutation addVariable ($variable: FactorGraphInput!) {
     addVariable(variable: $variable)
-  }`
+  }`;
 
 export const MUTATION_ADDFACTOR = `
   mutation addFactor ($factor: FactorGraphInput!) {
     addFactor(factor: $factor)
-  }`
+  }`;
 
 export const MUTATION_SOLVESESSION = `
   mutation solveSession ($client: ClientInput!) {
     solveSession(client: $client)
-  }`
+  }`;
 
 export const MUTATION_SOLVEFEDERATED = `
   mutation solveFederated ($scope: ScopeInput!) {
     solveFederated(scope: $scope)
-  }`
+  }`;
 
 export const MUTATION_DEMOCANONICALHEXAGONAL = `
   mutation demoCanonicalHexagonal ($client: ClientInput!) {
     demoCanonicalHexagonal(client: $client)
-  }`
+  }`;
 
 export const MUTATION_CREATE_UPLOAD = `
   mutation CreateUpload ($file: FileInput!, $parts: Int) {
@@ -193,22 +193,22 @@ export const MUTATION_CREATE_UPLOAD = `
         url
       }
     }
-  }`
+  }`;
 
 export const MUTATION_ABORT_UPLOAD = `
   mutation AbortUpload ($fileId: ID!, $uploadId: ID!) {
     abortUpload(fileId: $fileId, uploadId: $uploadId)
-  }`
+  }`;
 
 export const MUTATION_COMPLETE_UPLOAD = `
   mutation CompleteUpload ($fileId: ID!, $completedUpload: CompletedUploadInput!) {
     completeUpload(fileId: $fileId, completedUpload: $completedUpload)
-  }`
+  }`;
 
 export const MUTATION_PROC_CALIBRATION = `
   mutation ProcessCalibration ($fileId: ID!) {
     procCalibration(fileId: $fileId)
-  }`
+  }`;
 
 export const SUBSCRIPTION_UPDATES = `
   subscription TrackEvents($client: ClientInput!) {
@@ -218,4 +218,4 @@ export const SUBSCRIPTION_UPDATES = `
       state,
       timestamp
     }
-  }`
+  }`;

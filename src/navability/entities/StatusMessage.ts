@@ -1,12 +1,11 @@
 export type MutationUpdate = {
-    mutationUpdate: StatusMessage
-}
+  mutationUpdate: StatusMessage;
+};
 
 export type StatusMessage = {
-    state: String
-    action: String
-    requestId: String
-    timestamp: String
-    __typename: String
-    
-}
+  state: string;
+  action: string;
+  requestId: string;
+  timestamp: string;
+  __typename: string;
+};

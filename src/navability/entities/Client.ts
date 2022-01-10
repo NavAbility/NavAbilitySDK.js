@@ -1,29 +1,29 @@
 export type Client = {
-    userId:String
-    robotId:String
-    sessionId:String
-}
+  userId: string;
+  robotId: string;
+  sessionId: string;
+};
 
 export type Scope = {
-    environmentIds: String[],
-    userIds: String[],
-    robotIds: String[],
-    sessionIds: String[]
+  environmentIds: string[];
+  userIds: string[];
+  robotIds: string[];
+  sessionIds: string[];
+};
+
+export function Client(userId: string, robotId: string, sessionId: string): Client {
+  return {
+    userId,
+    robotId,
+    sessionId,
+  };
 }
 
-export function Client(userId: String, robotId: String, sessionId: String):Client {
-    return {
-        userId,
-        robotId,
-        sessionId
-    }
-}
-
-export function Scope(environmentIds: String[], userIds: String[], robotIds: String[], sessionIds: String[]):Scope {
-    return {
-        environmentIds,
-        userIds,
-        robotIds,
-        sessionIds
-    }
+export function Scope(environmentIds: string[], userIds: string[], robotIds: string[], sessionIds: string[]): Scope {
+  return {
+    environmentIds,
+    userIds,
+    robotIds,
+    sessionIds,
+  };
 }

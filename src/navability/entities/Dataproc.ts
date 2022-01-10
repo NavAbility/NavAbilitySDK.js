@@ -1,3 +1,3 @@
 export type CalibrationResult = {
-    placeholder: string
-}
+  placeholder: string;
+};

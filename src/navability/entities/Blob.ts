@@ -1,32 +1,32 @@
 export type FileInput = {
-    filename: string
-    filesize: number
-}
+  filename: string;
+  filesize: number;
+};
 
 export type File = {
-    id: string
-    filename: string
-    filesize: number
-}
-  
+  id: string;
+  filename: string;
+  filesize: number;
+};
+
 export type CompletedUploadPartInput = {
-    partNumber: number
-    eTag: string
-}
-  
+  partNumber: number;
+  eTag: string;
+};
+
 export type CompletedUploadInput = {
-    uploadId: string
-    parts: CompletedUploadPartInput[]
-}
-  
+  uploadId: string;
+  parts: CompletedUploadPartInput[];
+};
+
 export type UploadPart = {
-    partNumber: number
-    url: string
-}
-  
+  partNumber: number;
+  url: string;
+};
+
 export type UploadInfo = {
-    uploadId: string
-    parts: UploadPart[]
-    file: File
-    expiration?: string
-}
+  uploadId: string;
+  parts: UploadPart[];
+  file: File;
+  expiration?: string;
+};
