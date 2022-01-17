@@ -4,7 +4,7 @@ export enum QueryDetail {
   LABEL = 'LABEL',
   SKELETON = 'SKELETON',
   SUMMARY = 'SUMMARY',
-  FULL = 'FULL'
+  FULL = 'FULL',
 }
 
 export enum VariableType {

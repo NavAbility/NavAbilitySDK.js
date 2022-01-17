@@ -48,7 +48,7 @@ fragment variable_full_fields on VARIABLE{
 		...solverdata_fields
   }
 }
-`
+`;
 
 export const GQL_GETVARIABLE = `
 query sdk_get_variable(
@@ -67,7 +67,7 @@ query sdk_get_variable(
       }
     }
   }
-}`
+}`;
 
 export const GQL_GETVARIABLES = `
 query sdk_get_variables(
@@ -90,7 +90,7 @@ query sdk_get_variables(
       }
     }
   }
-}`
+}`;
 
 export const GQL_GETVARIABLESFILTERED = `
 query sdk_get_variables_filtered(
@@ -119,4 +119,4 @@ query sdk_get_variables_filtered(
       }
     }
   }
-}`
+}`;
