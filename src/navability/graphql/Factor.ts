@@ -13,7 +13,7 @@ fragment factor_full_fields on FACTOR {
   solvable
   data
 }
-`
+`;
 
 export const GQL_GETFACTOR = `
 query sdk_get_variable(
@@ -32,7 +32,7 @@ query sdk_get_variable(
       }
     }
   }
-}`
+}`;
 
 export const GQL_GETFACTORS = `
 query sdk_get_factors(
@@ -55,7 +55,7 @@ query sdk_get_factors(
       }
     }
   }
-}`
+}`;
 
 export const GQL_GETFACTORSFILTERED = `
 query sdk_get_factors(
@@ -84,4 +84,4 @@ query sdk_get_factors(
       }
     }
   }
-}`
+}`;

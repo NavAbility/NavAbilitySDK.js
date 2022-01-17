@@ -28,13 +28,13 @@ export async function getFactor(navAbilityClient: NavAbilityClient, client: Clie
       `
       ${GQL_FRAGMENT_FACTORS}
       ${GQL_GETFACTOR}
-      `
+      `,
     ),
     fetchPolicy: 'network-only',
     variables: {
       ...client,
-      label
-    }
+      label,
+    },
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);
@@ -49,10 +49,10 @@ export async function getFactors(navAbilityClient: NavAbilityClient, client: Cli
       `
       ${GQL_FRAGMENT_FACTORS}
       ${GQL_GETFACTORS}
-      `
+      `,
     ),
     fetchPolicy: 'network-only',
-    variables: client
+    variables: client,
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);

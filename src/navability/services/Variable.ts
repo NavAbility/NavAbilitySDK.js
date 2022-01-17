@@ -28,12 +28,12 @@ export async function getVariable(navAbilityClient: NavAbilityClient, client: Cl
       `
       ${GQL_FRAGMENT_VARIABLES}
       ${GQL_GETVARIABLE}
-      `
+      `,
     ),
     variables: {
       ...client,
       label,
-      fields_summary: true
+      fields_summary: true,
     },
   });
   if (response.Data.errors) {
@@ -43,27 +43,30 @@ export async function getVariable(navAbilityClient: NavAbilityClient, client: Cl
   }
 }
 
-export async function getVariables(navAbilityClient: NavAbilityClient, client: Client, detail:QueryDetail = QueryDetail.SKELETON): Promise<any[]> {
+export async function getVariables(
+  navAbilityClient: NavAbilityClient,
+  client: Client,
+  detail: QueryDetail = QueryDetail.SKELETON,
+): Promise<any[]> {
   const response = await navAbilityClient.query({
     query: gql(
       `
       ${GQL_FRAGMENT_VARIABLES}
       ${GQL_GETVARIABLES}
-      `
+      `,
     ),
     fetchPolicy: 'network-only',
     variables: {
       ...client,
-      fields_summary: detail == QueryDetail.SUMMARY,
-      fields_full: detail == QueryDetail.FULL
-    }
+      fields_summary: detail === QueryDetail.SUMMARY,
+      fields_full: detail === QueryDetail.FULL,
+    },
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.data.errors[0]}`);
   } else {
-    const result = response.data?.USER[0]?.robots[0]?.sessions[0]?.variables || []
-    console.log(result)
-    return result
+    const result = response.data?.USER[0]?.robots[0]?.sessions[0]?.variables || [];
+    return result;
   }
 }
 
