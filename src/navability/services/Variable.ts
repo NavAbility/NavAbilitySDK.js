@@ -54,15 +54,14 @@ export async function getVariables(navAbilityClient: NavAbilityClient, client: C
     fetchPolicy: 'network-only',
     variables: {
       ...client,
-      fields_summary: detail == QueryDetail.SUMMARY,
-      fields_full: detail == QueryDetail.FULL
+      fields_summary: detail === QueryDetail.SUMMARY,
+      fields_full: detail === QueryDetail.FULL
     }
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.data.errors[0]}`);
   } else {
     const result = response.data?.USER[0]?.robots[0]?.sessions[0]?.variables || []
-    console.log(result)
     return result
   }
 }
