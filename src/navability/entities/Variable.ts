@@ -1,5 +1,12 @@
 const DFG_VERSION = '0.17.1';
 
+export enum QueryDetail {
+  LABEL = 'LABEL',
+  SKELETON = 'SKELETON',
+  SUMMARY = 'SUMMARY',
+  FULL = 'FULL'
+}
+
 export enum VariableType {
   POINT2 = 'RoME.Point2',
   POSE2 = 'RoME.Pose2',

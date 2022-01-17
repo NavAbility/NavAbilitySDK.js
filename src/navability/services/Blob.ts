@@ -6,7 +6,7 @@ import {
   MUTATION_CREATE_UPLOAD,
   MUTATION_ABORT_UPLOAD,
   MUTATION_COMPLETE_UPLOAD,
-} from '../entities/Queries';
+} from '../graphql/QueriesDeprecated';
 import { FileInput, UploadInfo, CompletedUploadInput, File } from '../entities/Blob';
 
 export async function queryFiles(navAbilityClient: NavAbilityClient): Promise<File[]> {

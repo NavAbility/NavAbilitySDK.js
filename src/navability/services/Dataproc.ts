@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 import { NavAbilityClient } from '../entities/NavAbilityClient';
 import { CalibrationResult } from '../entities/Dataproc';
-import { MUTATION_PROC_CALIBRATION, QUERY_CALIBRATION } from '../entities/Queries';
+import { MUTATION_PROC_CALIBRATION, QUERY_CALIBRATION } from '../graphql/QueriesDeprecated';
 
 export function procCalibration(navAbilityClient: NavAbilityClient, fileId: string) {
   navAbilityClient.mutate({

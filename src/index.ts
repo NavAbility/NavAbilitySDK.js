@@ -1,5 +1,7 @@
 // Low-level
-export * from './navability/entities/Queries';
+export * from './navability/graphql/QueriesDeprecated';
+export * from './navability/graphql/Variable';
+export * from './navability/graphql/Factor';
 
 // Entities
 export * from './navability/entities/Blob';

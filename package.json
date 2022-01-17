@@ -5,11 +5,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
     "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -20,7 +20,12 @@
     "url": "git+https://github.com/NavAbility/NavAbilitySDK.js.git"
   },
   "author": "NavAbility",
-  "keywords": ["navability", "navigation", "slam", "sdk"],
+  "keywords": [
+    "navability",
+    "navigation",
+    "slam",
+    "sdk"
+  ],
   "homepage": "https://www.navability.io",
   "license": "Apache-2.0",
   "files": [

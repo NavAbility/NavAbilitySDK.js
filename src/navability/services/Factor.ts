@@ -3,7 +3,8 @@ import { gql } from '@apollo/client';
 import { NavAbilityClient } from '../entities/NavAbilityClient';
 import { Client } from '../entities/Client';
 import { Factor } from '../entities/Factor';
-import { MUTATION_ADDFACTOR, QUERY_FACTORS } from '../entities/Queries';
+import { MUTATION_ADDFACTOR } from '../graphql/QueriesDeprecated';
+import { GQL_FRAGMENT_FACTORS, GQL_GETFACTOR, GQL_GETFACTORS } from '../graphql/Factor';
 
 function dump(factor: Factor) {
   return JSON.stringify(factor);
@@ -21,15 +22,37 @@ export async function addFactor(navAbilityClient: NavAbilityClient, client: Clie
   });
 }
 
-export async function getFactors(navAbilityClient: NavAbilityClient, client: Client): Promise<any[]> {
+export async function getFactor(navAbilityClient: NavAbilityClient, client: Client, label: string): Promise<any[]> {
   const response = await navAbilityClient.query({
-    query: gql(QUERY_FACTORS),
+    query: gql(
+      `
+      ${GQL_FRAGMENT_FACTORS}
+      ${GQL_GETFACTOR}
+      `
+    ),
     fetchPolicy: 'network-only',
     variables: {
-      userId: client.userId,
-      robotId: client.robotId,
-      sessionId: client.sessionId,
-    },
+      ...client,
+      label
+    }
+  });
+  if (response.data.errors) {
+    throw Error(`Error: ${response.Data.errors[0]}`);
+  } else {
+    return response.data?.USER[0]?.robots[0]?.sessions[0]?.factors || [];
+  }
+}
+
+export async function getFactors(navAbilityClient: NavAbilityClient, client: Client): Promise<any[]> {
+  const response = await navAbilityClient.query({
+    query: gql(
+      `
+      ${GQL_FRAGMENT_FACTORS}
+      ${GQL_GETFACTORS}
+      `
+    ),
+    fetchPolicy: 'network-only',
+    variables: client
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);

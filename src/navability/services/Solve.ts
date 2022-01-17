@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 import { NavAbilityClient } from '../entities/NavAbilityClient';
 import { Client, Scope } from '../entities/Client';
-import { MUTATION_SOLVESESSION, MUTATION_SOLVEFEDERATED } from '../entities/Queries';
+import { MUTATION_SOLVESESSION, MUTATION_SOLVEFEDERATED } from '../graphql/QueriesDeprecated';
 
 export function solveSession(navAbilityClient: NavAbilityClient, client: Client) {
   navAbilityClient.mutate({
