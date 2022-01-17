@@ -1,7 +1,7 @@
 {
-  "name": "navability-sdk",
+  "name": "navabilitysdk",
   "version": "0.0.1",
-  "description": "NavAbility SDK",
+  "description": "NavAbility SDK: Access NavAbility Cloud factor graph features from JavaScript. Note that this SDK and the related API are still in development. Please let us know if you have any issues at info@navability.io.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -24,7 +24,9 @@
     "navability",
     "navigation",
     "slam",
-    "sdk"
+    "sdk",
+    "robotics",
+    "robots"
   ],
   "homepage": "https://www.navability.io",
   "license": "Apache-2.0",
