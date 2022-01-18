@@ -70,7 +70,11 @@ export async function getVariables(
   }
 }
 
-export async function ls(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
+export async function listVariables(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
   const variables: any[] = await getVariables(navAbilityClient, client);
   return variables.map((v) => v.label);
+}
+
+export async function ls(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
+  return listVariables(navAbilityClient, client)
 }

@@ -11,7 +11,7 @@ function dump(factor: Factor) {
 }
 
 export async function addFactor(navAbilityClient: NavAbilityClient, client: Client, factor: Factor) {
-  await navAbilityClient.mutate({
+  const response = await navAbilityClient.mutate({
     mutation: gql(MUTATION_ADDFACTOR),
     variables: {
       factor: {
@@ -61,7 +61,11 @@ export async function getFactors(navAbilityClient: NavAbilityClient, client: Cli
   }
 }
 
-export async function lsf(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
+export async function listFactors(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
   const factors = await getFactors(navAbilityClient, client);
   return factors.map((f) => f.label);
+}
+
+export async function lsf(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
+  return listFactors(navAbilityClient,client)
 }
