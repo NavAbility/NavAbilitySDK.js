@@ -67,5 +67,5 @@ export async function listFactors(navAbilityClient: NavAbilityClient, client: Cl
 }
 
 export async function lsf(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
-  return listFactors(navAbilityClient,client)
+  return listFactors(navAbilityClient, client);
 }

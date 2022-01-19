@@ -76,5 +76,5 @@ export async function listVariables(navAbilityClient: NavAbilityClient, client: 
 }
 
 export async function ls(navAbilityClient: NavAbilityClient, client: Client): Promise<string[]> {
-  return listVariables(navAbilityClient, client)
+  return listVariables(navAbilityClient, client);
 }
