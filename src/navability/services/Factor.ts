@@ -39,7 +39,7 @@ export async function getFactor(navAbilityClient: NavAbilityClient, client: Clie
   if (response.data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);
   } else {
-    return response.data?.USER[0]?.robots[0]?.sessions[0]?.factors || [];
+    return response.data?.users[0]?.robots[0]?.sessions[0]?.factors[0] || {};
   }
 }
 
@@ -52,12 +52,14 @@ export async function getFactors(navAbilityClient: NavAbilityClient, client: Cli
       `,
     ),
     fetchPolicy: 'network-only',
-    variables: client,
+    variables: {
+      ...client
+    }
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);
   } else {
-    return response.data?.USER[0]?.robots[0]?.sessions[0]?.factors || [];
+    return response.data?.users[0]?.robots[0]?.sessions[0]?.factors || [];
   }
 }
 
