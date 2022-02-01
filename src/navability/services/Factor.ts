@@ -53,8 +53,8 @@ export async function getFactors(navAbilityClient: NavAbilityClient, client: Cli
     ),
     fetchPolicy: 'network-only',
     variables: {
-      ...client
-    }
+      ...client,
+    },
   });
   if (response.data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);
