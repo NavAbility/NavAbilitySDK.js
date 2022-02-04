@@ -62,7 +62,7 @@ query sdk_get_factors(
   	$userId: ID!, 
   	$robotIds: [ID!]!, 
   	$sessionIds: [ID!]!, 
-    $factor_label_regexp: ID = ".*",
+    $factor_label_regexp: String = ".*",
     $factor_tags: [String] = ["FACTOR"],
     $solvable: Int! = 0,
   	$fields_summary: Boolean! = false, 

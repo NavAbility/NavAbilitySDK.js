@@ -96,7 +96,7 @@ query sdk_get_variables_filtered(
   	$userId: ID!, 
   	$robotIds: [ID!]!, 
   	$sessionIds: [ID!]!, 
-    $variable_label_regexp: ID = ".*",
+    $variable_label_regexp: String = ".*",
     $variable_tags: [String] = ["VARIABLE"],
     $solvable: Int! = 0,
   	$fields_summary: Boolean! = false, 
