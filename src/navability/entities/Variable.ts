@@ -30,7 +30,7 @@ export type Variable = {
 export function Variable(
   label: string,
   type: string,
-  tags: string[] = ['Variable'],
+  tags: string[] = ['VARIABLE'],
   timestamp: string = new Date().toISOString(),
 ): Variable {
   const solverDataDict = {
