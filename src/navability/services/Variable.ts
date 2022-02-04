@@ -39,7 +39,7 @@ export async function getVariable(navAbilityClient: NavAbilityClient, client: Cl
   if (response.Data.errors) {
     throw Error(`Error: ${response.Data.errors[0]}`);
   } else {
-    return response.Data.data.USER[0].robots[0].session[0].variables[0];
+    return response.Data.data?.users[0]?.robots[0]?.sessions[0]?.variables[0] || {};
   }
 }
 
@@ -65,7 +65,7 @@ export async function getVariables(
   if (response.data.errors) {
     throw Error(`Error: ${response.data.errors[0]}`);
   } else {
-    const result = response.data?.USER[0]?.robots[0]?.sessions[0]?.variables || [];
+    const result = response.data?.users[0]?.robots[0]?.sessions[0]?.variables || [];
     return result;
   }
 }
