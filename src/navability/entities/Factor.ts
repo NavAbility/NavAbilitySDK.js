@@ -74,14 +74,14 @@ export function Pose2Pose2Data(mus = [1, 0, 0.3333 * PI], sigmas = [0.01, 0.01, 
 }
 
 export function Pose2AprilTag4CornersData(
-  id: string,
-  corners: any,
-  homography: any,
-  K = [300.0, 0.0, 0.0, 0.0, 300.0, 0.0, 180.0, 120.0, 1.0],
-  taglength = 0.25,
+  id:number,
+  corners: number[],
+  homography: number[],
+  K: number[] = [300.0, 0.0, 0.0, 0.0, 300.0, 0.0, 180.0, 120.0, 1.0],
+  taglength: number = 0.25,
 ): FactorData {
   const fnc = {
-    mimeType: '/application/JuliaLang/PackedPose2AprilTag4Corners',
+    _type: "/application/JuliaLang/PackedPose2AprilTag4Corners",
     corners,
     homography,
     K,
