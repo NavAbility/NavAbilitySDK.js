@@ -48,10 +48,10 @@ function InitializeFactorData(): FactorData {
 export function PriorPose2Data(xythetaPrior = [0.0, 0.0, 0.0], xythetaCovars = [0.01, 0.01, 0.01]): FactorData {
   const fnc = {
     Z: {
-      _type: "IncrementalInference.PackedFullNormal",
+      _type: 'IncrementalInference.PackedFullNormal',
       mu: xythetaPrior,
-      cov: [xythetaCovars[0], 0.0, 0.0, 0.0, xythetaCovars[1], 0.0, 0.0, 0.0, xythetaCovars[2]]
-    }
+      cov: [xythetaCovars[0], 0.0, 0.0, 0.0, xythetaCovars[1], 0.0, 0.0, 0.0, xythetaCovars[2]],
+    },
   };
   const data = InitializeFactorData();
   data.fnc = fnc;
@@ -62,10 +62,10 @@ export function PriorPose2Data(xythetaPrior = [0.0, 0.0, 0.0], xythetaCovars = [
 export function Pose2Pose2Data(mus = [1, 0, 0.3333 * PI], sigmas = [0.01, 0.01, 0.01]): FactorData {
   const fnc = {
     Z: {
-      _type: "IncrementalInference.PackedFullNormal",
+      _type: 'IncrementalInference.PackedFullNormal',
       mu: mus,
-      cov: [sigmas[0], 0.0, 0.0, 0.0, sigmas[1], 0.0, 0.0, 0.0, sigmas[2]]
-    }
+      cov: [sigmas[0], 0.0, 0.0, 0.0, sigmas[1], 0.0, 0.0, 0.0, sigmas[2]],
+    },
   };
   const data = InitializeFactorData();
   data.fnc = fnc;
@@ -74,14 +74,14 @@ export function Pose2Pose2Data(mus = [1, 0, 0.3333 * PI], sigmas = [0.01, 0.01, 
 }
 
 export function Pose2AprilTag4CornersData(
-  id:number,
+  id: number,
   corners: number[],
   homography: number[],
   K: number[] = [300.0, 0.0, 0.0, 0.0, 300.0, 0.0, 180.0, 120.0, 1.0],
   taglength: number = 0.25,
 ): FactorData {
   const fnc = {
-    _type: "/application/JuliaLang/PackedPose2AprilTag4Corners",
+    _type: '/application/JuliaLang/PackedPose2AprilTag4Corners',
     corners,
     homography,
     K,
@@ -109,9 +109,9 @@ export function Factor(
     nstime: '0',
     fnctype: fncType,
     _variableOrderSymbols: variableOrderSymbols,
-    data: data,
+    data,
     solvable: 1,
-    tags: tags,
+    tags,
     timestamp,
     _version: DFG_VERSION,
   };
