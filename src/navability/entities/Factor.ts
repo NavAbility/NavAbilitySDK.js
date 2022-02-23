@@ -1,4 +1,4 @@
-const DFG_VERSION = '0.17.1';
+const DFG_VERSION = '0.18.0';
 const PI = 3.14159;
 
 export enum FactorType {
@@ -23,10 +23,10 @@ export type Factor = {
   label: string;
   nstime: string;
   fnctype: string;
-  _variableOrderSymbols: string;
-  data: string;
+  _variableOrderSymbols: string[];
+  data: FactorData;
   solvable: number;
-  tags: string;
+  tags: string[];
   timestamp: string;
   _version: string;
 };
@@ -47,7 +47,11 @@ function InitializeFactorData(): FactorData {
 
 export function PriorPose2Data(xythetaPrior = [0.0, 0.0, 0.0], xythetaCovars = [0.01, 0.01, 0.01]): FactorData {
   const fnc = {
-    str: `FullNormal(\ndim: 3\nμ: [${xythetaPrior[0]}, ${xythetaPrior[1]}, ${xythetaPrior[2]}]\nΣ: [${xythetaCovars[0]} 0.0 0.0; 0.0 ${xythetaCovars[1]} 0.0; 0.0 0.0 ${xythetaCovars[2]}])`,
+    Z: {
+      _type: "IncrementalInference.PackedFullNormal",
+      mu: xythetaPrior,
+      cov: [xythetaCovars[0], 0.0, 0.0, 0.0, xythetaCovars[1], 0.0, 0.0, 0.0, xythetaCovars[2]]
+    }
   };
   const data = InitializeFactorData();
   data.fnc = fnc;
@@ -57,9 +61,11 @@ export function PriorPose2Data(xythetaPrior = [0.0, 0.0, 0.0], xythetaCovars = [
 
 export function Pose2Pose2Data(mus = [1, 0, 0.3333 * PI], sigmas = [0.01, 0.01, 0.01]): FactorData {
   const fnc = {
-    datastr: `FullNormal(\ndim: 3\nμ: [${mus.join(', ')}]\nΣ: [${sigmas[0]} 0.0 0.0; 0.0 ${sigmas[1]} 0.0; 0.0 0.0 ${
-      sigmas[2]
-    }]\n)`,
+    Z: {
+      _type: "IncrementalInference.PackedFullNormal",
+      mu: mus,
+      cov: [sigmas[0], 0.0, 0.0, 0.0, sigmas[1], 0.0, 0.0, 0.0, sigmas[2]]
+    }
   };
   const data = InitializeFactorData();
   data.fnc = fnc;
@@ -102,10 +108,10 @@ export function Factor(
     label,
     nstime: '0',
     fnctype: fncType,
-    _variableOrderSymbols: JSON.stringify(variableOrderSymbols),
-    data: JSON.stringify(data),
+    _variableOrderSymbols: variableOrderSymbols,
+    data: data,
     solvable: 1,
-    tags: JSON.stringify(tags),
+    tags: tags,
     timestamp,
     _version: DFG_VERSION,
   };
