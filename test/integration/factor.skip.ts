@@ -1,7 +1,7 @@
-import { NavAbilityHttpsClient, Client } from '../..'
-import { ls, addVariable, Variable } from '../..'
-import { lsf, addFactor, getFactor, Factor, FactorType } from '../..'
-import { Pose2AprilTag4CornersData, Pose2Pose2Data } from '../..'
+import { NavAbilityHttpsClient, Client } from '../../dist'
+import { ls, addVariable, Variable } from '../../dist'
+import { lsf, addFactor, getFactor, Factor, FactorType } from '../../dist'
+import { Pose2AprilTag4CornersData, Pose2Pose2Data } from '../../dist'
 
 jest.setTimeout(180 * 1000)
 const navAbilityApi = "http://localhost:4343"
