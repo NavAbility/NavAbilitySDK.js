@@ -22,7 +22,7 @@ export async function addFactor(navAbilityClient: NavAbilityClient, client: Clie
   });
 }
 
-export async function getFactor(navAbilityClient: NavAbilityClient, client: Client, label: string): Promise<any[]> {
+export async function getFactor(navAbilityClient: NavAbilityClient, client: Client, label: string): Promise<any> {
   const response = await navAbilityClient.query({
     query: gql(
       `
