@@ -4,8 +4,8 @@ import { NavAbilityClient } from '../entities/NavAbilityClient';
 import { Client, Scope } from '../entities/Client';
 import { MUTATION_SOLVESESSION, MUTATION_SOLVEFEDERATED } from '../graphql/QueriesDeprecated';
 
-export function solveSession(navAbilityClient: NavAbilityClient, client: Client) {
-  navAbilityClient.mutate({
+export async function solveSession(navAbilityClient: NavAbilityClient, client: Client) {
+  await navAbilityClient.mutate({
     mutation: gql(MUTATION_SOLVESESSION),
     variables: {
       client,
@@ -13,8 +13,8 @@ export function solveSession(navAbilityClient: NavAbilityClient, client: Client)
   });
 }
 
-export function solveFederated(navAbilityClient: NavAbilityClient, scope: Scope) {
-  navAbilityClient.mutate({
+export async function solveFederated(navAbilityClient: NavAbilityClient, scope: Scope) {
+  await navAbilityClient.mutate({
     mutation: gql(MUTATION_SOLVEFEDERATED),
     variables: {
       scope,
