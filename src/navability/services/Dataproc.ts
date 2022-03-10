@@ -4,8 +4,8 @@ import { NavAbilityClient } from '../entities/NavAbilityClient';
 import { CalibrationResult } from '../entities/Dataproc';
 import { MUTATION_PROC_CALIBRATION, QUERY_CALIBRATION } from '../graphql/QueriesDeprecated';
 
-export function procCalibration(navAbilityClient: NavAbilityClient, fileId: string) {
-  navAbilityClient.mutate({
+export async function procCalibration(navAbilityClient: NavAbilityClient, fileId: string): Promise<void> {
+  await navAbilityClient.mutate({
     mutation: gql(MUTATION_PROC_CALIBRATION),
     variables: {
       fileId,
