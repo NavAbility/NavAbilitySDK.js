@@ -18,11 +18,11 @@ export interface NavAbilityClient {
   mutate: (options: MutationOptions) => Promise<any>;
 }
 
-export function NavAbilityWebsocketClient(apiUrl: string): NavAbilityClient {
+export function NavAbilityWebsocketClient(apiUrl: string="wss://api.navability.io/graphql"): NavAbilityClient {
   throw Error('Not implemented yet');
 }
 
-export function NavAbilityHttpsClient(apiUrl: string): NavAbilityClient {
+export function NavAbilityHttpsClient(apiUrl: string="https://api.navability.io"): NavAbilityClient {
   const cache = new InMemoryCache();
   const link = createHttpLink({ uri: apiUrl, fetch });
   return new ApolloClient({ link, cache });
