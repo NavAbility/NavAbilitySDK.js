@@ -2,18 +2,20 @@ import { gql } from '@apollo/client';
 
 import { NavAbilityClient } from '../entities/NavAbilityClient';
 import {
-  QUERY_FILES,
   MUTATION_CREATE_UPLOAD,
   MUTATION_ABORT_UPLOAD,
   MUTATION_COMPLETE_UPLOAD,
 } from '../graphql/QueriesDeprecated';
 import { FileInput, UploadInfo, CompletedUploadInput, File } from '../entities/Blob';
+import { QUERY_BLOBS } from '../graphql/Blob';
+
+// TODO: Change all these to blob.
 
 export async function queryFiles(navAbilityClient: NavAbilityClient): Promise<File[]> {
   try {
     const result = await navAbilityClient.query({
       fetchPolicy: 'network-only',
-      query: gql(QUERY_FILES),
+      query: gql(QUERY_BLOBS),
     });
     return result.data.files;
   } catch (e) {

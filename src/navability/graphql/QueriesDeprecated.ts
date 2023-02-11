@@ -1,11 +1,3 @@
-export const QUERY_FILES = `
-  query Files {
-    files {
-      id
-      filename
-    }
-  }`;
-
 export const QUERY_CALIBRATION = `
   query Calibration($fileId: ID!) {
     calibration(fileId: $fileId) {
