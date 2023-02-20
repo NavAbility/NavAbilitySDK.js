@@ -1,4 +1,4 @@
-const DFG_VERSION = '0.18.1';
+const DFG_VERSION = '0.18.11';
 
 export enum QueryDetail {
   LABEL = 'LABEL',
