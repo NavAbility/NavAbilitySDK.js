@@ -1,4 +1,4 @@
-const DFG_VERSION = '0.18.1';
+const DFG_VERSION = '0.18.11';
 const PI = 3.14159;
 
 export enum FactorType {

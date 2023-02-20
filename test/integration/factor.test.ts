@@ -4,7 +4,7 @@ import { lsf, addFactor, getFactor, Factor, FactorType } from '../../dist'
 import { Pose2AprilTag4CornersData, Pose2Pose2Data } from '../../dist'
 
 jest.setTimeout(180 * 1000)
-const navAbilityApi = "https://api.d1.navability.io"
+const navAbilityApi = "https://api.p1.navability.io"
 const userId = "guest@navability.io"
 const robotId = "DemoRobot"
 const MAX_POLLING_TRIES = 150
