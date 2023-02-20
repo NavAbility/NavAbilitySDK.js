@@ -26,9 +26,8 @@ export async function queryFiles(navAbilityClient: NavAbilityClient): Promise<Fi
 export async function getDownloadUrl(navAbilityClient: NavAbilityClient, fileId: string) {
   const result = await navAbilityClient.mutate({
     mutation: gql(MUTATION_CREATE_DOWNLOAD),
-    variables: { fileId: fileId },
+    variables: { fileId },
   });
-  console.log(result);
   return result.data.url;
 }
 
