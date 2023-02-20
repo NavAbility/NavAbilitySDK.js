@@ -7,7 +7,7 @@ import {
   MUTATION_COMPLETE_UPLOAD,
 } from '../graphql/QueriesDeprecated';
 import { FileInput, UploadInfo, CompletedUploadInput, File } from '../entities/Blob';
-import { QUERY_BLOBS } from '../graphql/Blob';
+import { MUTATION_CREATE_DOWNLOAD, QUERY_BLOBS } from '../graphql/Blob';
 
 // TODO: Change all these to blob.
 
@@ -21,6 +21,15 @@ export async function queryFiles(navAbilityClient: NavAbilityClient): Promise<Fi
   } catch (e) {
     return [];
   }
+}
+
+export async function getDownloadUrl(navAbilityClient: NavAbilityClient, fileId: string) {
+  const result = await navAbilityClient.mutate({
+    mutation: gql(MUTATION_CREATE_DOWNLOAD),
+    variables: { fileId: fileId },
+  });
+  console.log(result);
+  return result.data.url;
 }
 
 export async function createUpload(

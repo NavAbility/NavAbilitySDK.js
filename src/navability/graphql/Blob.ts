@@ -8,3 +8,9 @@ export const QUERY_BLOBS = `
       filename
     }
   }`;
+
+export const MUTATION_CREATE_DOWNLOAD = `
+  mutation app_create_download($fileId: ID!) {
+    url: createDownload(fileId: $fileId)
+  }
+`;
