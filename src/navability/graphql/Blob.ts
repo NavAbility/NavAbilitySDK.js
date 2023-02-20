@@ -1,4 +1,4 @@
-//TODO: Move all the file functionality to here as blob functionality.
+// TODO: Move all the file functionality to here as blob functionality.
 
 export const QUERY_BLOBS = `
   query Files {
