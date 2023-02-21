@@ -1,6 +1,6 @@
 {
   "name": "navabilitysdk",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "NavAbility SDK: Access NavAbility Cloud factor graph features from JavaScript. Note that this SDK and the related API are still in development. Please let us know if you have any issues at info@navability.io.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
