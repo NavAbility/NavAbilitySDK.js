@@ -1,4 +1,13 @@
 export const GQL_FRAGMENT_VARIABLES = `
+fragment data_fields on DataEntry {
+  id
+  label
+  description
+  blobstore
+  hash
+  mimeType
+  origin
+}
 fragment ppe_fields on Ppe {
   solveKey
   suggested
@@ -42,8 +51,10 @@ fragment variable_summary_fields on Variable {
 fragment variable_full_fields on Variable{
   smallData
   solvable
-  solverData
-  {
+  data {
+    ...data_fields
+  }
+  solverData {
 		...solverdata_fields
   }
 }

@@ -36,10 +36,10 @@ export async function getVariable(navAbilityClient: NavAbilityClient, client: Cl
       fields_summary: true,
     },
   });
-  if (response.Data.errors) {
-    throw Error(`Error: ${response.Data.errors[0]}`);
+  if (response.data.errors) {
+    throw Error(`Error: ${response.data.errors[0]}`);
   } else {
-    return response.Data.data?.users[0]?.robots[0]?.sessions[0]?.variables[0] || {};
+    return response.data?.users[0]?.robots[0]?.sessions[0]?.variables[0] || {};
   }
 }
 
