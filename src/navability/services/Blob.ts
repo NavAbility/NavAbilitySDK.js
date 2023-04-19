@@ -6,51 +6,49 @@ import {
   MUTATION_ABORT_UPLOAD,
   MUTATION_COMPLETE_UPLOAD,
 } from '../graphql/QueriesDeprecated';
-import { FileInput, UploadInfo, CompletedUploadInput, File } from '../entities/Blob';
+import { BlobInput, UploadInfo, CompletedUploadInput, Blob } from '../entities/Blob';
 import { MUTATION_CREATE_DOWNLOAD, QUERY_BLOBS } from '../graphql/Blob';
 
-// TODO: Change all these to blob.
-
-export async function queryFiles(navAbilityClient: NavAbilityClient): Promise<File[]> {
+export async function queryBlobs(navAbilityClient: NavAbilityClient): Promise<Blob[]> {
   try {
     const result = await navAbilityClient.query({
       fetchPolicy: 'network-only',
       query: gql(QUERY_BLOBS),
     });
-    return result.data.files;
+    return result.data.blobs;
   } catch (e) {
     return [];
   }
 }
 
-export async function getDownloadUrl(navAbilityClient: NavAbilityClient, fileId: string) {
+export async function getDownloadUrl(navAbilityClient: NavAbilityClient, blobId: string) {
   const result = await navAbilityClient.mutate({
     mutation: gql(MUTATION_CREATE_DOWNLOAD),
-    variables: { fileId },
+    variables: { blobId },
   });
   return result.data.url;
 }
 
 export async function createUpload(
   navAbilityClient: NavAbilityClient,
-  file: FileInput,
+  blob: BlobInput,
   parts: number,
 ): Promise<UploadInfo> {
   const result = await navAbilityClient.mutate({
     mutation: gql(MUTATION_CREATE_UPLOAD),
     variables: {
-      file,
+      blob,
       parts,
     },
   });
   return result.data.createUpload;
 }
 
-export async function abortUpload(navAbilityClient: NavAbilityClient, fileId: string, uploadId: string) {
+export async function abortUpload(navAbilityClient: NavAbilityClient, blobId: string, uploadId: string) {
   await navAbilityClient.mutate({
     mutation: gql(MUTATION_ABORT_UPLOAD),
     variables: {
-      fileId,
+      blobId,
       uploadId,
     },
   });
@@ -58,13 +56,13 @@ export async function abortUpload(navAbilityClient: NavAbilityClient, fileId: st
 
 export async function completeUpload(
   navAbilityClient: NavAbilityClient,
-  fileId: string,
+  blobId: string,
   completedUpload: CompletedUploadInput,
 ) {
   await navAbilityClient.mutate({
     mutation: gql(MUTATION_COMPLETE_UPLOAD),
     variables: {
-      fileId,
+      blobId,
       completedUpload,
     },
   });

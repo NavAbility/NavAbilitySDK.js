@@ -1,16 +1,16 @@
 // TODO: Move all the file functionality to here as blob functionality.
 
 export const QUERY_BLOBS = `
-  query Files {
-    files {
+  query Blobs {
+    blobs {
       id
-      filesize
-      filename
+      size
+      name
     }
   }`;
 
 export const MUTATION_CREATE_DOWNLOAD = `
-  mutation app_create_download($fileId: ID!) {
-    url: createDownload(fileId: $fileId)
+  mutation app_create_download($blobId: ID!) {
+    url: createDownload(blobId: $blobId)
   }
 `;

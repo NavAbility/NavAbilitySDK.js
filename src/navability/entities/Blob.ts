@@ -1,12 +1,12 @@
-export type FileInput = {
-  filename: string;
-  filesize: number;
+export type BlobInput = {
+  name: string;
+  size: number;
 };
 
-export type File = {
+export type Blob = {
   id: string;
-  filename: string;
-  filesize: number;
+  name: string;
+  size: number;
 };
 
 export type CompletedUploadPartInput = {
@@ -27,6 +27,6 @@ export type UploadPart = {
 export type UploadInfo = {
   uploadId: string;
   parts: UploadPart[];
-  file: File;
+  blob: Blob;
   expiration?: string;
 };
