@@ -1,6 +1,6 @@
 {
   "name": "navabilitysdk",
-  "version": "0.4.3",
+  "version": "0.6.0",
   "description": "NavAbility SDK: Access NavAbility Cloud factor graph features from JavaScript. Note that this SDK and the related API are still in development. Please let us know if you have any issues at info@navability.io.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -41,14 +41,15 @@
     "package.json"
   ],
   "dependencies": {
-    "@apollo/client": "^3.5.8",
+    "@apollo/client": "^3.7.9",
     "isomorphic-fetch": "^3.0.0",
-    "react": "^16.12.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "0.0.35",
     "@types/jest": "^27.4.0",
-    "@types/react": "^17.0.38",
+    "@types/react": "^17.0.53",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.2",

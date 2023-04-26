@@ -1,78 +1,95 @@
 export const GQL_FRAGMENT_VARIABLES = `
-fragment data_fields on DataEntry {
+fragment FRAGMENT_BLOBENTRY on BlobEntry {
   id
+  blobId
+  originId
   label
-  description
   blobstore
   hash
-  mimeType
   origin
+  description
+  mimeType
+  metadata
+  timestamp
+  _type
+  _version
 }
-fragment ppe_fields on Ppe {
+fragment FRAGMENT_PPE on PPE {
+  id
   solveKey
   suggested
   max
   mean
+  _type
+  _version
+  createdTimestamp
   lastUpdatedTimestamp
 }
-fragment solverdata_fields on SolverData {
-  solveKey
-  BayesNetOutVertIDs
-  BayesNetVertID
-  dimIDs
-  dimbw
-  dims
+fragment FRAGMENT_SOLVERDATA on SolverData {
+  id
+  vecval
   dimval
-  dontmargin
+  vecbw
+  dimbw
+  BayesNetOutVertIDs
+  dimIDs
+  dims
   eliminated
-  infoPerCoord
-  initialized
-  ismargin
+  BayesNetVertID
   separator
+  variableType
+  initialized
+  infoPerCoord
+  ismargin
+  dontmargin
   solveInProgress
   solvedCount
-  variableType
-  vecbw
-  vecval
+  solveKey
   _version  
 }
-fragment variable_skeleton_fields on Variable {
-	label
+fragment FRAGMENT_VARIABLE_SKELETON on Variable {
+  id
+  label
   tags
 }
-fragment variable_summary_fields on Variable {
+fragment FRAGMENT_VARIABLE_SUMMARY on Variable {
   timestamp
+  nstime
   ppes {
-    ...ppe_fields
+    ...FRAGMENT_PPE
+  }
+  blobEntries {
+    ...FRAGMENT_BLOBENTRY
   }
   variableType
   _version
 }
-fragment variable_full_fields on Variable{
-  smallData
+fragment FRAGMENT_VARIABLE on Variable {
+  metadata
   solvable
-  data {
-    ...data_fields
-  }
-  solverData {
-		...solverdata_fields
+  solverData
+  {
+    ...FRAGMENT_SOLVERDATA
   }
 }
 `;
 
 export const GQL_GETVARIABLE = `
-query sdk_get_variable(
-  	$userId: ID!, 
-  	$robotId: ID!, 
-  	$sessionId: ID!,
-    $label: ID!) {
-	users(where:{id:$userId}){
-		robots(where:{id: $robotId}) {
-      sessions(where:{id: $sessionId}) {
-        variables(where:{label: $label}) {
-          ...variable_skeleton_fields
-          ...variable_summary_fields
-          ...variable_full_fields
+query QUERY_GET_VARIABLE(
+  $userLabel: EmailAddress!
+  $robotLabel: String!
+  $sessionLabel: String!
+  $variableLabel: String!
+  $fields_summary: Boolean! = true
+  $fields_full: Boolean! = true
+) {
+  users(where: { label: $userLabel }) {
+    robots(where: { label: $robotLabel }) {
+      sessions(where: { label: $sessionLabel }) {
+        variables(where: { label: $variableLabel }) {
+          ...FRAGMENT_VARIABLE_SKELETON
+          ...FRAGMENT_VARIABLE_SUMMARY @include(if: $fields_summary)
+          ...FRAGMENT_VARIABLE @include(if: $fields_full)
         }
       }
     }
@@ -80,53 +97,23 @@ query sdk_get_variable(
 }`;
 
 export const GQL_GETVARIABLES = `
-query sdk_get_variables(
-  	$userId: ID!, 
-  	$robotId: ID!, 
-  	$sessionId: ID!,
-  	$fields_summary: Boolean! = false, 
-  	$fields_full: Boolean! = false){
-	users(where:{id:$userId}) {
-    name
-		robots(where:{id: $robotId}) {
-      name
-      sessions(where:{id: $sessionId}){
-        name
+query QUERY_GET_VARIABLES(
+  $userLabel: EmailAddress!
+  $robotLabel: String!
+  $sessionLabel: String!
+  $fields_summary: Boolean! = true
+  $fields_full: Boolean! = true
+) {
+  users(where: { label: $userLabel }) {
+    robots(where: { label: $robotLabel }) {
+      sessions(where: { label: $sessionLabel }) {
         variables {
-          ...variable_skeleton_fields
-          ...variable_summary_fields @include(if: $fields_summary)
-          ...variable_full_fields @include(if: $fields_full)
+          ...FRAGMENT_VARIABLE_SKELETON
+          ...FRAGMENT_VARIABLE_SUMMARY @include(if: $fields_summary)
+          ...FRAGMENT_VARIABLE @include(if: $fields_full)
         }
       }
     }
   }
 }`;
 
-export const GQL_GETVARIABLESFILTERED = `
-query sdk_get_variables_filtered(
-  	$userId: ID!, 
-  	$robotIds: [ID!]!, 
-  	$sessionIds: [ID!]!, 
-    $variable_label_regexp: String = ".*",
-    $variable_tags: [String] = ["VARIABLE"],
-    $solvable: Int! = 0,
-  	$fields_summary: Boolean! = false, 
-  	$fields_full: Boolean! = false){
-	users(where:{id:$userId}){
-    name
-		robots(where:{id_IN: $robotIds}) {
-      name
-      sessions(where:{id_IN: $sessionIds}){
-        name
-        variables(where:{
-            label_MATCHES: $variable_label_regexp, 
-          	tags: $variable_tags, 
-          	solvable_GTE: $solvable}) {
-          ...variable_skeleton_fields
-          ...variable_summary_fields @include(if: $fields_summary)
-          ...variable_full_fields @include(if: $fields_full)
-        }
-      }
-    }
-  }
-}`;

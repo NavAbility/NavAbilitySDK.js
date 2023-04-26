@@ -10,19 +10,23 @@ function dump(variable: Variable) {
   return JSON.stringify(variable);
 }
 
-export async function addVariable(navAbilityClient: NavAbilityClient, client: Client, variable: Variable) {
-  const response = await navAbilityClient.mutate({
-    mutation: gql(MUTATION_ADDVARIABLE),
-    variables: {
-      variable: {
-        client,
-        packedData: dump(variable),
-      },
-    },
-  });
-}
+// export async function addVariable(navAbilityClient: NavAbilityClient, client: Client, variable: Variable) {
+//   const response = await navAbilityClient.mutate({
+//     mutation: gql(MUTATION_ADDVARIABLE),
+//     variables: {
+//       variable: {
+//         client,
+//         packedData: dump(variable),
+//       },
+//     },
+//   });
+// }
 
-export async function getVariable(navAbilityClient: NavAbilityClient, client: Client, label: string): Promise<any> {
+export async function getVariable(
+  navAbilityClient: NavAbilityClient,
+  client: Client,
+  label: string,
+): Promise<Variable> {
   const response = await navAbilityClient.query({
     query: gql(
       `
@@ -32,7 +36,7 @@ export async function getVariable(navAbilityClient: NavAbilityClient, client: Cl
     ),
     variables: {
       ...client,
-      label,
+      variableLabel: label,
       fields_summary: true,
     },
   });
@@ -47,7 +51,7 @@ export async function getVariables(
   navAbilityClient: NavAbilityClient,
   client: Client,
   detail: QueryDetail = QueryDetail.SKELETON,
-): Promise<any[]> {
+): Promise<Variable[]> {
   const response = await navAbilityClient.query({
     query: gql(
       `
@@ -58,7 +62,7 @@ export async function getVariables(
     fetchPolicy: 'network-only',
     variables: {
       ...client,
-      fields_summary: detail === QueryDetail.SUMMARY,
+      fields_summary: detail === QueryDetail.SUMMARY || detail === QueryDetail.FULL,
       fields_full: detail === QueryDetail.FULL,
     },
   });

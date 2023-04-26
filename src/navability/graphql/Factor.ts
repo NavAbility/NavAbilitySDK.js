@@ -1,11 +1,32 @@
 export const GQL_FRAGMENT_FACTORS = `
+fragment FRAGMENT_BLOBENTRY on BlobEntry {
+  id
+  blobId
+  originId
+  label
+  blobstore
+  hash
+  origin
+  description
+  mimeType
+  metadata
+  timestamp
+  _type
+  _version
+}
 fragment factor_skeleton_fields on Factor {
+  id
 	label
   tags
   _variableOrderSymbols
 }
 fragment factor_summary_fields on Factor {
+  ...factor_skeleton_fields
   timestamp
+  nstime
+  blobEntries {
+    ...FRAGMENT_BLOBENTRY
+  }
   _version
 }
 fragment factor_full_fields on Factor {
@@ -16,15 +37,15 @@ fragment factor_full_fields on Factor {
 `;
 
 export const GQL_GETFACTOR = `
-query sdk_get_variable(
-  	$userId: ID!, 
-  	$robotId: ID!, 
-  	$sessionId: ID!,
-    $label: ID!) {
-	users(where:{id:$userId}) {
-		robots(where:{id: $robotId}) {
-      sessions(where:{id: $sessionId}) {
-        factors(where:{label: $label}) {
+query sdk_get_factor(
+  $userLabel: EmailAddress!
+  $robotLabel: String!
+  $sessionLabel: String!
+  $factorLabel: String!) {
+	users(where:{label:$userLabel}) {
+		robots(where:{label: $robotLabel}) {
+      sessions(where:{label: $sessionLabel}) {
+        factors(where:{label: $factorLabel}) {
           ...factor_skeleton_fields
           ...factor_summary_fields
           ...factor_full_fields
@@ -36,47 +57,18 @@ query sdk_get_variable(
 
 export const GQL_GETFACTORS = `
 query sdk_get_factors(
-  	$userId: ID!, 
-  	$robotId: ID!, 
-  	$sessionId: ID!,
+    $userLabel: EmailAddress!,
+    $robotLabel: String!,
+    $sessionLabel: String!,
   	$fields_summary: Boolean! = false, 
   	$fields_full: Boolean! = false){
-  users(where:{id:$userId}) {
-    name
-    robots(where:{id: $robotId}) {
-      name
-      sessions(where:{id: $sessionId}){
-        name
+  users(where:{label:$userLabel}) {
+    label
+    robots(where:{label: $robotLabel}) {
+      label
+      sessions(where:{label: $sessionLabel}){
+        label
         factors {
-          ...factor_skeleton_fields
-          ...factor_summary_fields @include(if: $fields_summary)
-          ...factor_full_fields @include(if: $fields_full)
-        }
-      }
-    }
-  }
-}`;
-
-export const GQL_GETFACTORSFILTERED = `
-query sdk_get_factors(
-  	$userId: ID!, 
-  	$robotIds: [ID!]!, 
-  	$sessionIds: [ID!]!, 
-    $factor_label_regexp: String = ".*",
-    $factor_tags: [String] = ["FACTOR"],
-    $solvable: Int! = 0,
-  	$fields_summary: Boolean! = false, 
-  	$fields_full: Boolean! = false){
-	users(where:{id:$userId}) {
-    name
-		robots(where:{id_IN: $robotIds}) {
-      name
-      sessions(where:{id_IN: $sessionIds}){
-        name
-        factors(where:{
-            label_MATCHES: $factor_label_regexp, 
-          	tags: $factor_tags, 
-          	solvable_GTE: $solvable}) {
           ...factor_skeleton_fields
           ...factor_summary_fields @include(if: $fields_summary)
           ...factor_full_fields @include(if: $fields_full)

@@ -3,11 +3,31 @@ export type BlobInput = {
   size: number;
 };
 
+// TODO: Deprecate
 export type Blob = {
   id: string;
   name: string;
   size: number;
 };
+
+export type BlobEntry = {
+  id?: string,
+  blobId?: string,
+  originId: string,
+  label: string,
+  description: string,
+  hash: string,
+  mimeType: string,
+  blobstore: string,
+  origin: string,
+  metadata: string
+  timestamp: string
+  nstime: string
+  _type: string,
+  _version: string,
+  createdTimestamp?: string,
+  lastUpdatedTimestamp?: string
+}
 
 export type CompletedUploadPartInput = {
   partNumber: number;
