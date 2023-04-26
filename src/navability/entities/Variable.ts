@@ -1,4 +1,6 @@
-const DFG_VERSION = '0.18.11';
+import { BlobEntry } from "./Blob";
+
+const DFG_VERSION = '0.21.1';
 
 export enum QueryDetail {
   LABEL = 'LABEL',
@@ -12,19 +14,62 @@ export enum VariableType {
   POSE2 = 'RoME.Pose2',
 }
 
+export type PPE = {
+  id?: string, 
+  solveKey: string,
+  suggested: number[],
+  max: number[],
+  mean: number[],
+  _type: string,
+  _version: string,
+  createdTimestamp: string,
+  lastUpdatedTimestamp: string
+}
+
+export type SolverData = {
+  id?: string
+  solveKey: string
+  BayesNetOutVertIDs: string[]
+  BayesNetVertID: string
+  dimIDs: number[]
+  dimbw: number
+  dims: number
+  dimval: number
+  dontmargin: boolean
+  eliminated: boolean
+  infoPerCoord: number[]
+  initialized: boolean
+  ismargin: boolean
+  separator: string[]
+  solveInProgress: number
+  solvedCount: number
+  variableType: string
+  vecbw: number[]
+  vecval: number[]
+  covar: number[]
+
+  _version: string
+  createdTimestamp?: string
+  lastUpdatedTimestamp?: string
+}
+
 export type Variable = {
+  id?: string;
   label: string;
-  dataEntry: string;
   nstime: string;
-  variableType: string;
-  dataEntryType: string;
-  ppeDict: string;
-  solverDataDict: string;
-  smallData: string;
-  solvable: number;
-  tags: string;
   timestamp: string;
+  variableType: string;
+  tags: string[];
   _version: string;
+  solvable: number;
+
+  metadata: string;
+  createdTimestamp?: string;
+  lastUpdatedTimestamp?: string;
+
+  blobEntries?: BlobEntry[];
+  ppes: PPE[];
+  solverData: SolverData[];
 };
 
 export function Variable(
@@ -33,8 +78,7 @@ export function Variable(
   tags: string[] = ['VARIABLE'],
   timestamp: string = new Date().toISOString(),
 ): Variable {
-  const solverDataDict = {
-    default: {
+  const solverData:SolverData[] = [ {
       vecval: [
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -68,19 +112,20 @@ export function Variable(
       solveInProgress: 0,
       solvedCount: 0,
       solveKey: 'default',
-    },
-  };
+      _version: DFG_VERSION,
+      covar: []
+    }];
   const result: Variable = {
+    id: undefined,
     label,
-    dataEntry: '{}',
+    metadata: btoa('{}'),
     nstime: '0',
     variableType: type,
-    dataEntryType: '{}',
-    ppeDict: '{}',
-    solverDataDict: JSON.stringify(solverDataDict),
-    smallData: '{}',
+    ppes: [],
     solvable: 1,
-    tags: JSON.stringify(tags),
+    blobEntries: [],
+    solverData: solverData,
+    tags: tags,
     timestamp,
     _version: DFG_VERSION,
   };

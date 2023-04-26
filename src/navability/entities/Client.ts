@@ -1,7 +1,7 @@
 export type Client = {
-  userId: string;
-  robotId: string;
-  sessionId: string;
+  userLabel: string;
+  robotLabel: string;
+  sessionLabel: string;
 };
 
 export type Scope = {
@@ -11,11 +11,11 @@ export type Scope = {
   sessionIds: string[];
 };
 
-export function Client(userId: string, robotId: string, sessionId: string): Client {
+export function Client(userLabel: string, robotLabel: string, sessionLabel: string): Client {
   return {
-    userId,
-    robotId,
-    sessionId,
+    userLabel,
+    robotLabel,
+    sessionLabel,
   };
 }
 

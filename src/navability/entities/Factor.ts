@@ -1,3 +1,5 @@
+import { BlobEntry } from "./Blob";
+
 const DFG_VERSION = '0.18.11';
 const PI = 3.14159;
 
@@ -20,14 +22,21 @@ type FactorData = {
 };
 
 export type Factor = {
+  id?: string;
   label: string;
+  metadata: string;
+  
   nstime: string;
+  timestamp: string;
   fnctype: string;
   _variableOrderSymbols: string[];
   data: FactorData;
   solvable: number;
   tags: string[];
-  timestamp: string;
+  blobEntries: BlobEntry[];
+  createdTimestamp?: string;
+  lastUpdatedTimestamp?: string;
+  _type: string;
   _version: string;
 };
 
@@ -114,6 +123,9 @@ export function Factor(
     tags,
     timestamp,
     _version: DFG_VERSION,
+    blobEntries: [],
+    metadata: btoa('{}'),
+    _type: "FACTOR"
   };
   return result;
 }

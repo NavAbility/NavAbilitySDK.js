@@ -10,17 +10,17 @@ function dump(factor: Factor) {
   return JSON.stringify(factor);
 }
 
-export async function addFactor(navAbilityClient: NavAbilityClient, client: Client, factor: Factor) {
-  const response = await navAbilityClient.mutate({
-    mutation: gql(MUTATION_ADDFACTOR),
-    variables: {
-      factor: {
-        client,
-        packedData: dump(factor),
-      },
-    },
-  });
-}
+// export async function addFactor(navAbilityClient: NavAbilityClient, client: Client, factor: Factor) {
+//   const response = await navAbilityClient.mutate({
+//     mutation: gql(MUTATION_ADDFACTOR),
+//     variables: {
+//       factor: {
+//         client,
+//         packedData: dump(factor),
+//       },
+//     },
+//   });
+// }
 
 export async function getFactor(navAbilityClient: NavAbilityClient, client: Client, label: string): Promise<any> {
   const response = await navAbilityClient.query({
@@ -33,7 +33,7 @@ export async function getFactor(navAbilityClient: NavAbilityClient, client: Clie
     fetchPolicy: 'network-only',
     variables: {
       ...client,
-      label,
+      factorLabel: label,
     },
   });
   if (response.data.errors) {

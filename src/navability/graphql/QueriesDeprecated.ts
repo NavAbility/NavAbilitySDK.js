@@ -31,13 +31,13 @@ export const MUTATION_DEMOCANONICALHEXAGONAL = `
   }`;
 
 export const MUTATION_CREATE_UPLOAD = `
-  mutation CreateUpload ($file: FileInput!, $parts: Int) {
-    createUpload(file: $file, parts: $parts) {
+  mutation CreateUpload ($blob: BlobInput!, $parts: Int) {
+    createUpload(blob: $blob, parts: $parts) {
       uploadId
-      file {
+      blob {
         id
-        filename
-        filesize
+        name
+        size
       }
       parts {
         partNumber
@@ -47,18 +47,18 @@ export const MUTATION_CREATE_UPLOAD = `
   }`;
 
 export const MUTATION_ABORT_UPLOAD = `
-  mutation AbortUpload ($fileId: ID!, $uploadId: ID!) {
-    abortUpload(fileId: $fileId, uploadId: $uploadId)
+  mutation AbortUpload ($blobId: ID!, $uploadId: ID!) {
+    abortUpload(blobId: $blobId, uploadId: $uploadId)
   }`;
 
 export const MUTATION_COMPLETE_UPLOAD = `
-  mutation CompleteUpload ($fileId: ID!, $completedUpload: CompletedUploadInput!) {
-    completeUpload(fileId: $fileId, completedUpload: $completedUpload)
+  mutation CompleteUpload ($blobId: ID!, $completedUpload: CompletedUploadInput!) {
+    completeUpload(blobId: $blobId, completedUpload: $completedUpload)
   }`;
 
 export const MUTATION_PROC_CALIBRATION = `
-  mutation ProcessCalibration ($fileId: ID!) {
-    procCalibration(fileId: $fileId)
+  mutation ProcessCalibration ($blobId: ID!) {
+    procCalibration(blobId: $blobId)
   }`;
 
 export const SUBSCRIPTION_UPDATES = `

@@ -1,13 +1,33 @@
-export type FileInput = {
-  filename: string;
-  filesize: number;
+export type BlobInput = {
+  name: string;
+  size: number;
 };
 
-export type File = {
+// TODO: Deprecate
+export type Blob = {
   id: string;
-  filename: string;
-  filesize: number;
+  name: string;
+  size: number;
 };
+
+export type BlobEntry = {
+  id?: string,
+  blobId?: string,
+  originId: string,
+  label: string,
+  description: string,
+  hash: string,
+  mimeType: string,
+  blobstore: string,
+  origin: string,
+  metadata: string
+  timestamp: string
+  nstime: string
+  _type: string,
+  _version: string,
+  createdTimestamp?: string,
+  lastUpdatedTimestamp?: string
+}
 
 export type CompletedUploadPartInput = {
   partNumber: number;
@@ -27,6 +47,6 @@ export type UploadPart = {
 export type UploadInfo = {
   uploadId: string;
   parts: UploadPart[];
-  file: File;
+  blob: Blob;
   expiration?: string;
 };
