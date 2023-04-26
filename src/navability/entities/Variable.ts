@@ -124,8 +124,8 @@ export function Variable(
     ppes: [],
     solvable: 1,
     blobEntries: [],
-    solverData: solverData,
-    tags: tags,
+    solverData,
+    tags,
     timestamp,
     _version: DFG_VERSION,
   };
